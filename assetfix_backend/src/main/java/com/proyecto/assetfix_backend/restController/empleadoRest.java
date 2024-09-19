@@ -47,4 +47,14 @@ public class empleadoRest {
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR );
         }
     }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarEmpleado(@PathVariable Long id) {
+
+        if (!empleadoService.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        empleadoService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
